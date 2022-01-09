@@ -10,11 +10,19 @@ function Persons() {
 
     const addPerson = (person: Person) => { setPersons([...persons, person]) }
 
+    const removePerson = (indexToRemove: number) => {
+        setPersons(persons.filter((_, index) => index !== indexToRemove ))
+    }
+
     return (
         <div className="Persons">
             <h1>Here's the people</h1>
             <div>{
-                persons.map(person => <li>{person.firstName} {person.lastName}, aged {person.age}</li>)}
+                persons.map((person, index) =>
+                    <li>{person.firstName} {person.lastName}, aged {person.age}
+                        <button onClick={_ => removePerson(index)}>Remove</button>
+                    </li>)
+            }
             </div>
             <div>
                 <PersonForm addPerson={addPerson}/>
